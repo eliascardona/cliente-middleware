@@ -1,8 +1,6 @@
 const responseHere = document.getElementById('response')
 const probarBtn = document.getElementById('probarBtn')
 
-console.log(responseHere)
-
 async function probarEndpoint(evt) {
     evt.preventDefault()
     const temp = {
@@ -15,80 +13,78 @@ async function probarEndpoint(evt) {
         section2: {
             sectionId: 'workCharacteristics',
             jobSatisfaction: 8,
-            workEnvironment: "Supportive",
+            workEnvironment: 8,
         },
         section3: {
             sectionId: 'familySystemFactors',
-            familySupport: "Good",
+            familySupport: 3,
             numberOfDependents: 3,
         },
         section4: {
             sectionId: 'socioCulturalEconomicFactors',
-            income: 4500,
-            educationLevel: "Bachelor's",
-            employmentStatus: "Full-time",
+            income: 5000,
+            educationLevel: 5,
+            employmentStatus: 2,
         },
         section5: {
             sectionId: 'generalHealthStatus',
-            healthStatus: "Good",
-            chronicConditions: ["None"],
-            recentHospitalization: false,
+            healthStatus: 21,
+            chronicConditions: [1, 2, 3],
+            recentHospitalization: 1,
         },
         section6: {
             sectionId: 'universalSelfCare',
-            selfCareHabits: "Regular Exercise",
-            sleepQuality: "Good",
+            selfCareHabits: 2,
+            sleepQuality: 2,
         },
         section7: {
             sectionId: 'cardiovascularSystem',
-            heartCondition: "None",
-            bloodPressure: 120,
+            heartCondition: 10,
+            bloodPressure: 3,
         },
         section8: {
             sectionId: 'nutrition',
             dailyFruitVegetableIntake: 5,
-            waterIntake: "Adequate",
+            waterIntake: 1,
         },
         section9: {
             sectionId: 'lifestyle',
-            activityLevel: "Moderate",
-            restQuality: "Good",
+            activityLevel: 2,
+            restQuality: 2,
         },
         section10: {
             sectionId: 'auditoryVisualSystem',
-            hearingCondition: "Normal",
-            visionCondition: "Normal",
+            hearingCondition: 2,
+            visionCondition: 2,
         },
         section11: {
             sectionId: 'lifeThreateningRiskPrevention',
-            smokingStatus: "Non-smoker",
-            alcoholConsumption: "Occasional",
+            smokingStatus: 2,
+            alcoholConsumption: 2,
         },
         section12: {
             sectionId: 'environmentalFactors',
-            workEnvironmentQuality: "Good",
-            noiseLevel: "Low",
+            workEnvironmentQuality: 2,
+            noiseLevel: 2,
         },
         section13: {
             sectionId: 'promotionOfHumanFunctioning',
-            mentalHealth: "Stable",
-            socialInteractionLevel: "High",
+            mentalHealth: 4,
+            socialInteractionLevel: 4,
         }
     }
 
     try {
         const r = await fetch('http://localhost:8082/forms', {
+            // mode: 'no-cors',
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(temp)
         })
-        if(!r.ok) {
-            console.log('Error en la solicitud HTTP')
-        }
-        console.log(r)
-        responseHere.innerText = `server dice`
+        const j = await r.json()
+        console.log(j)
 
     } catch(err) {
         console.log('Error en el servidor', err)
@@ -98,34 +94,3 @@ async function probarEndpoint(evt) {
 probarBtn.addEventListener('click', async (e) => {
     await probarEndpoint(e)
 })
-
-
-
-// form.addEventListener('submit', async (e) => {
-//     const resp = await createMovie(e)
-//     if(typeof resp.pelicula_id === 'string') {
-//         respHere.innerText(`Has creado una película con el Id ${resp.pelicula_id}`)
-//     }
-// })
-
-// estimar precio del total de articulos
-// async function showMovies() {
-//     try {
-//         const r = await fetch('/movies/all', {
-//             method: "GET",
-//             headers: {
-//                 "Content-Type": "application/json"
-//             }
-//         })
-//         const j = await r.json()
-//         const temp = { ...j }
-
-//         let stringTemp = "id: " + temp.pelicula_id + ", nombre: " + temp.nombre + "."
-
-//         return stringTemp
-
-//     } catch (e) {
-//         console.log("err on fetch", e)
-//     }
-
-// }
