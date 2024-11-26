@@ -1,8 +1,7 @@
-// const arrayHere = document.getElementById('arrayHere')
-
-// const form = document.getElementById('form')
-// const respHere = document.getElementById('respHere')
+const responseHere = document.getElementById('response')
 const probarBtn = document.getElementById('probarBtn')
+
+console.log(responseHere)
 
 async function probarEndpoint(evt) {
     evt.preventDefault()
@@ -78,7 +77,7 @@ async function probarEndpoint(evt) {
     }
 
     try {
-        const r = await fetch('http://localhost:8082/endpoint/prueba', {
+        const r = await fetch('http://localhost:8082/forms', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -89,6 +88,7 @@ async function probarEndpoint(evt) {
             console.log('Error en la solicitud HTTP')
         }
         console.log(r)
+        responseHere.innerText = `server dice`
 
     } catch(err) {
         console.log('Error en el servidor', err)
